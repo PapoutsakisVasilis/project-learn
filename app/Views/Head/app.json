@@ -1,0 +1,15 @@
+[
+  {
+  "name": "bootstrap.min",
+  "type": "css"
+  },
+  {
+    "name": "jquery3.min",
+    "type": "js"
+
+  },
+  {
+    "name": "bootstrap.bundle.min",
+    "type": "js"
+  }
+]
