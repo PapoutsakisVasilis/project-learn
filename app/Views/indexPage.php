@@ -1,8 +1,8 @@
 
-<?php include "viewsHelper.php"?>
+<?php include "viewsHelper.php"; ?>
 <html>
 <head>
-<?php viewHead("app",'css'); ?>
+<?php viewLib("app",'css'); ?>
 
 </head>
 
@@ -20,7 +20,7 @@
             </div>
 
             <div class="col-lg-4">
-                <?php echo "$base".$go;?>
+                <?php echo ("$base".$go);?>
                 <form action="/project-learn/public/" method="post">
                     <input type="text" value="hello" name="greets">
                     <button type="submit"> go </button>
@@ -32,7 +32,7 @@
 
 
 
-    <?php viewHead("app",'js'); ?>
+    <?php viewLib("app",'js'); ?>
 
 </body>
 </html>

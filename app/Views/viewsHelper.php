@@ -6,23 +6,26 @@
  * Time: 10:47 PM
  */
 
-function viewHead($head,$type)
+function viewLib($head,$type,$position = 'default')
 {
 
-    if(file_exists(__DIR__."/Head/"."$head".".json")){
+    if(file_exists(__DIR__ . "/Head/" .$head.".json")){
         // Read JSON file
-        $json = file_get_contents(__DIR__."/Head/"."$head".".json");
+        $json = file_get_contents(__DIR__ . "/Head/" .$head.".json");
 
         //Decode JSON
         $json_data = json_decode($json);
 
         $mainR = '';
+        $flag = (strcmp($position, 'default')==0) ? false : true;
+
         switch ($type)
         {
             case 'css':
                 foreach ($json_data as $data)
                 {
-                    if($data->type == 'css'){
+
+                    if(($data->type == 'css' && !$flag) || ($data->type == 'css' && $flag && strcmp($data->position, $position) == 0 )){
                         $mainR .= '<link rel="stylesheet" type="text/css" href="'."/project-learn/public/assets/css/".$data->name.'.css">'.PHP_EOL;
                     }
                 }
@@ -31,7 +34,7 @@ function viewHead($head,$type)
                 foreach ($json_data as $data)
                 {
 
-                    if($data->type == 'js'){
+                    if(($data->type == 'js' && !$flag) || ($data->type == 'js' && $flag && strcmp($data->position, $position) == 0 )){
                         $mainR .= '<script type='.'"text/javascript"'. ' src='.'"'.''."/project-learn/public/assets/js/".$data->name.'.js"></script>'.PHP_EOL;
                     }
                 }

@@ -63,6 +63,11 @@ Class Autoload
         }
     }
 
+    public function loadRequests()
+    {
+        return require "app/Services/Request.php";
+    }
+
 
 
 }

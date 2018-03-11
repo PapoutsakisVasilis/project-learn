@@ -1,15 +1,17 @@
 [
   {
-  "name": "bootstrap.min",
-  "type": "css"
+    "name": "bootstrap.min",
+    "type": "css",
+    "position":"head"
   },
   {
     "name": "jquery3.min",
-    "type": "js"
-
+    "type": "js",
+    "position":"b_b_ends"
   },
   {
     "name": "bootstrap.bundle.min",
-    "type": "js"
+    "type": "js",
+    "position":"b_b_ends"
   }
 ]

@@ -14,6 +14,7 @@ $auto->loadViewHandler();
 $auto->loadRedirections();
 $auto->loadDB();
 $auto->loadModels();
+$auto->loadRequests();
 
 
 
@@ -51,12 +52,24 @@ class MainIndexController
         $da = new \Models\User();
         $data = $da::all();
 
+        $postReq = new Request();
+        $result = $postReq->create('http://localhost/project-learn/public/valcheck')
+            ->type()
+            ->method('POST')
+            ->headers("Content-type: application/x-www-form-urlencoded")
+            ->content(['valMain' => 'some_val'])
+            ->commit();
+        $base = ($result != false)? $result : 'oops';
+        return redirect()->to('public/')->with(['status' => $base])->send();//view("indexPage.php", compact('base', 'go'));
+    }
 
-        return var_dump($data[0]->getProps());
-
-
-
-        //return redirect()->to('public/')->with(['status' => $base])->send();//view("indexPage.php", compact('base', 'go'));
+    public function valueCheckTest($request)
+    {
+        if (isset($request->valMain)){
+            return Request::response(' Hello '.$request->valMain);
+        }else{
+            return false;
+        }
     }
 
 }

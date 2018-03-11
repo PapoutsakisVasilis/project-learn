@@ -22,12 +22,15 @@ switch ($action)
         echo("$actionParam");
         if (file_exists("app/Views/".$actionParam.'.php')){echo(" File Already Exists..."); return;}
         $myfile = fopen("app/Views/$actionParam.php", "w") or die("Unable to open file!");
-        $txt = "<html> \n";
+        $txt = '<?php include "viewsHelper.php"?>'.PHP_EOL;
+        $txt .= "<html> \n";
         $txt .= "<head> \n";
+        $txt .= '<?php viewHead("app","css"); ?>'.PHP_EOL;
         $txt .= "</head> \n";
         $txt .= "<body> \n";
         $txt .= "\n";
         $txt .= "\n";
+        $txt .= '<?php viewHead("app","js"); ?>'."\n";
         $txt .= "</body> \n";
         $txt .= "</html> \n";
         fwrite($myfile, $txt);
@@ -42,7 +45,8 @@ switch ($action)
         echo(PHP_EOL);
 
         echo("--Create-- make::view nameOfView  Located At App Views".PHP_EOL);
-        echo exec('whoami');
+        //todo generation of appKey --echo exec('whoami'); --hint
+
         break;
 
 }
