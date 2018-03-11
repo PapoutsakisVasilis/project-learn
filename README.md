@@ -101,4 +101,33 @@ that haves all the retrieved records from the database at the table users that t
 <br>
 <br>
  TODO: the model's functionalities
+ 
+ 
+ 
+  Api Requests
+ --------------
+ Example Of A POST Request From A controller's Function:
+----------------------------------------------------------
+          $postReq = new Request(); //create a request instance
+          $result = $postReq->create('http://localhost/project-learn/public/valcheck') //set the url
+                    ->type() // http or https Default is http
+                    ->method('POST') // set the Method
+                    ->headers("Content-type: application/x-www-form-urlencoded") set the headers it accepts also array for more
+                    ->content(['valMain' => 'some_val']) // the data to be sent
+                    ->commit(); //finaly making the http request
+                    
+                    //the data that will return its a PHP variable ready to be used example: --$result--
+                    
+                    
+          For Example A method that accepts http request:
+          
+          public function valueCheckTest($request)
+          {
+                    if (isset($request->valMain)){
+                              return Request::response(array('Hello Bill', 1, array('33')));
+                    }else{
+                              return false;
+                    }
+          }
+                  
 
