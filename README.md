@@ -129,5 +129,10 @@ that haves all the retrieved records from the database at the table users that t
                               return false;
                     }
           }
+          
+          
+          
+          From the Controllers the responces Can be Used Like:
+                    return responce(array('Hello Bill', 1, array('33'))); // like a function
                   
 
