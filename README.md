@@ -62,3 +62,43 @@ Controllers And DB functionality Example -3-:
 At this example the callDB action at the MainIndexController will, <br>
 redirect to public/ and at the session will be available the status -key with the value of $data var, <b>
 that haves all the retrieved records from the database at the table users that the id equals to 1.
+
+
+ Models
+---------
+          namespace Models;
+
+
+          class User extends Model
+          {
+              public static $table = 'users';
+              public $id;
+              public $username;
+              public $pass;
+              public $user_nick_name;
+
+
+
+              public function __construct()
+              {
+                  parent::$table = self::$table;
+                  parent::$modelName = self::class;
+                  return $this;
+              }
+
+              public function getProps(){
+                  return get_object_vars($this);
+              }
+          }
+ At this example its a basic Model. <br>
+ Define the properties that you want to have, but follow the database Schema. <b>
+          
+ A typical retrieve of all records of the model from the database is for example <br>
+------------------------------------------------------------------------------------
+          $userModel = new \Models\User();
+          $usersRecords = $userModel::all();
+
+<br>
+<br>
+ TODO: the model's functionalities
+
