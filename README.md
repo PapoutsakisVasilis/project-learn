@@ -126,6 +126,17 @@ So "$result" will be set with the integer of the affected rows from the update q
 ------------------------------------------------------------------------------------
           $userModel = new \Models\User();
           $usersRecords = $userModel::all();
+------------------------------------------------------------------------------------
+<br>
+<br>
+
+
+A typical retrieve of all records of the model from the database "Select Where" for example <br>
+------------------------------------------------------------------------------------
+          $userModel = new \Models\User();
+          $usersRecords = $userModel->select_where('user_nick_name','=','Freedom');
+------------------------------------------------------------------------------------
+Will return an array of User Model Records or will return false; 
 
 <br>
 <br>
