@@ -91,7 +91,36 @@ that haves all the retrieved records from the database at the table users that t
               }
           }
  At this example its a basic Model. <br>
- Define the properties that you want to have, but follow the database Schema. <b>
+ Define the properties that the model will have, but follow the database Schema. <b>
+          
+ A typical store action for the model at the database is for example <br>
+------------------------------------------------------------------------------------
+          $userModel = new \Models\User();
+          $userModel->username = 'some';
+          $userModel->user_nick_name = 'one';
+          $userModel->pass = 'someone';
+          $userModel->save();
+          echo ($userModel->id);
+         
+---------------------------------------------------------------------------------------
+After the saving procedure the $userModel will set the "public $id;".
+So the user's model id will be the record id at the table users that it was just created. 
+<br>
+<br>       
+
+A typical update of model's record at the database
+---------------------------------------------------------------------------------------
+          $userModel = new \Models\User();
+          $userModel->find(1); //retrive the record by the id 1 from users table.
+          $userModel->val = 1;
+          $result = $userModel->save();
+---------------------------------------------------------------------------------------
+
+After the update procedure the $userModel will be updated withe new values to the database.
+So "$result" will be set with the integer of the affected rows from the update query else it will return false.
+<br>
+<br> 
+          
           
  A typical retrieve of all records of the model from the database is for example <br>
 ------------------------------------------------------------------------------------
@@ -100,7 +129,7 @@ that haves all the retrieved records from the database at the table users that t
 
 <br>
 <br>
- TODO: the model's functionalities
+ TODO: extending model's functionalities
  
  
  
@@ -133,6 +162,6 @@ that haves all the retrieved records from the database at the table users that t
           
           
           From the Controllers the responces Can be Used Like:
-                    return responce(array('Hello Bill', 1, array('33'))); // like a function
+                    return response(array('Hello Bill', 1, array('33'))); // like a function
                   
 
