@@ -57,3 +57,19 @@ function sessionDestroy($key)
 {
     Sessions::destroy($key);
 }
+
+function session_set($sessionVals)
+{
+    if (is_array($sessionVals))
+    {
+        foreach ($sessionVals as $keySess => $valSess){
+            $_SESSION["$keySess"] = $valSess;
+        }
+    }elseif (is_object($sessionVals)){
+        //todo properties to session
+        $allProps = get_object_vars($sessionVals);
+        foreach ($allProps as $propK => $propV){
+            $_SESSION["$propK"] = $propV;
+        }
+    }
+}

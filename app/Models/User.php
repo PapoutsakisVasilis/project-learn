@@ -16,6 +16,7 @@ class User extends Model
     public $username;
     public $pass;
     public $user_nick_name;
+    public $val;
 
 
 
@@ -29,6 +30,8 @@ class User extends Model
     public function getProps(){
         return get_object_vars($this);
     }
+
+
 
 
 }

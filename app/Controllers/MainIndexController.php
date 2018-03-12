@@ -24,7 +24,7 @@ class MainIndexController
     public function index()
     {
         $base = 'hello World !!!';
-        $go = "2018";
+        $go = " 2018";
         return view("indexPage.php", compact('base', 'go'));
     }
 
@@ -36,7 +36,7 @@ class MainIndexController
             $base = $request->greets;
         }
 
-        return redirect()->to('public/')->with(['status' => $base])->send();//view("indexPage.php", compact('base', 'go'));
+        return redirect()->to('public/')->with(['status' => $base])->send();
     }
 
     public function callDB()
@@ -49,8 +49,25 @@ class MainIndexController
             ->where('id','>','0')
             ->get();
 
+        //$da = new \Models\User();
+        /*$data = $da::all();
+        return var_dump($data[0]->getProps());*/
+        /*$da->username = 'some';
+        $da->user_nick_name = 'one';
+        $da->pass = 'go';
+        $da->val = 2;
+        $da->save();*/
+        /*$da = new \Models\User();
+        $da->find(1);
+
+        $da->val = 1;
+        $res = $da->save();
+
+        return var_dump($res);*/
+
         $da = new \Models\User();
-        $data = $da::all();
+        $results = $da->select_where('user_nick_name','=','Freedom');
+        return var_dump($results);
 
         $postReq = new Request();
         $result = $postReq->create('http://localhost/project-learn/public/valcheck')
@@ -60,7 +77,7 @@ class MainIndexController
             ->content(['valMain' => 'some_val'])
             ->commit();
         $base = ($result != false)? $result : 'oops';
-        return redirect()->to('public/')->with(['status' => $base])->send();//view("indexPage.php", compact('base', 'go'));
+        return redirect()->to('public/')->with(['status' => $base])->send();
     }
 
     public function valueCheckTest($request)

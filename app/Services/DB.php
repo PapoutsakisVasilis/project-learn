@@ -10,7 +10,7 @@ class DB
 {
 
     private static $table;
-    private static $queries;
+    private static $queries = [];
     private static $selectFields = [];
     private static $connectionRecs;
 
@@ -23,9 +23,9 @@ class DB
 
     public function where($col, $logic, $val)
     {
-        if (isset(DB::$queries) && count(DB::$queries) > 0){
-            array_push(DB::$queries, "$col $logic $val");
-        }
+
+        array_push(DB::$queries, "$col $logic $val");
+
         return $this;
     }
 
@@ -43,7 +43,7 @@ class DB
         return $this;
     }
 
-    public function get()
+    public function get($byModel = false)
     {
         $query = 'SELECT';
         if (count(DB::$selectFields)>0)
@@ -85,6 +85,9 @@ class DB
             die("Connection failed: " . $conn->connect_error);
         }
 
+        if ($byModel === true){
+            return "$query";
+        }
         $sql = "$query";
         $result = $conn->query($sql);
 
@@ -135,12 +138,14 @@ class DB
         }elseif (strcmp($type, 'insert') == 0 || strcmp($type, 'update') == 0){
             $sql = "$string";
             $result = $conn->query($sql);
+            $result = ($result != false && strcmp($type, 'update') != 0) ?  $conn->insert_id : $result;
+            $result = ($result != false && strcmp($type, 'update') == 0) ?  $conn->affected_rows : $result;
             $conn->close();
             $data = $result;
         }else{
+            //TODO delete
             $data = false;
         }
-
         return $data;
     }
 
