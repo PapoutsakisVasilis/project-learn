@@ -61,7 +61,7 @@ Controllers And DB functionality Example -3-:
 
 At this example the callDB action at the MainIndexController will, <br>
 redirect to public/ and at the session will be available the status -key with the value of $data var, <b>
-that haves all the retrieved records from the database at the table users that the id equals to 1.
+that has all the retrieved records from the database at the table users that the id equals to 1.
 
 
  Models
