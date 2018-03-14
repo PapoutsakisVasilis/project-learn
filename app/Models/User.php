@@ -17,6 +17,7 @@ class User extends Model
     public $pass;
     public $user_nick_name;
     public $val;
+    public $jsonval;
 
 
 

@@ -115,8 +115,8 @@ class Model
         $db = new \DB();
         $db->connection('localhost', 'dbprojectlearn', 'root', '');
         $db->table(strval(self::$table));
-        $db->where($col, $logic, "'".$val."'");
-        $query = $db->get(true);
+        $db->where($col, $logic, $val);
+        $query = $db->get(true);//return $query;
         $data = $db->rawQuery($query, 'select', Model::$modelName);
         if (isset($data[0])){
             return $data;

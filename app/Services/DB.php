@@ -9,22 +9,22 @@
 class DB
 {
 
-    private static $table;
-    private static $queries = [];
-    private static $selectFields = [];
-    private static $connectionRecs;
+    private  $table;
+    private  $queries = [];
+    private  $selectFields = [];
+    private  $connectionRecs;
 
 
     public function table($tableName)
     {
-        DB::$table = $tableName;
+        $this->table = $tableName;
         return $this;
     }
 
     public function where($col, $logic, $val)
     {
 
-        array_push(DB::$queries, "$col $logic $val");
+        array_push($this->queries, "$col $logic $val");
 
         return $this;
     }
@@ -32,11 +32,11 @@ class DB
     public function select($arrayOfFields = '*')
     {
         if ($arrayOfFields == '*'){
-            array_push(DB::$selectFields, $arrayOfFields);
+            array_push($this->selectFields, $arrayOfFields);
         }else{
             foreach ($arrayOfFields as $field)
             {
-                array_push(DB::$selectFields, $field);
+                array_push($this->selectFields, $field);
             }
         }
 
@@ -46,21 +46,21 @@ class DB
     public function get($byModel = false)
     {
         $query = 'SELECT';
-        if (count(DB::$selectFields)>0)
+        if (count($this->selectFields)>0)
         {
-            foreach (DB::$selectFields as $selectField){
+            foreach ($this->selectFields as $selectField){
                 $query .= ' '.$selectField.' ';
             }
         }else{
             $query .= ' * ';
         }
 
-        $query .= "FROM ".DB::$table.' ';
+        $query .= "FROM ".$this->table.' ';
 
-        if (isset(DB::$queries) && count(DB::$queries)>0)
+        if (isset($this->queries) && count($this->queries)>0)
         {
             $count = 0;
-            foreach (DB::$queries as $que)
+            foreach ($this->queries as $que)
             {
                 if ($count == 0){
                     $count++;
@@ -72,7 +72,7 @@ class DB
             }
         }
 
-        $connectObj = DB::$connectionRecs;
+        $connectObj = $this->connectionRecs;
         $servername = "$connectObj->conn_path";
         $username = "$connectObj->username";
         $password = "$connectObj->pass";
@@ -109,13 +109,13 @@ class DB
         $connectObj->dbaname = $dbname;
         $connectObj->username = $username;
         $connectObj->pass = $pass;
-        DB::$connectionRecs = $connectObj;
+        $this->connectionRecs = $connectObj;
         return $this;
     }
 
     public function rawQuery($string,$type, $classType = 'stdClass')
     {
-        $connectObj = DB::$connectionRecs;
+        $connectObj = $this->connectionRecs;
         $servername = "$connectObj->conn_path";
         $username = "$connectObj->username";
         $password = "$connectObj->pass";
@@ -150,4 +150,10 @@ class DB
     }
 
 
+}
+
+function jsonFieldsDB($column, $obj)
+{
+    $result = $column.'->"$.'.$obj.'"';
+    return $result;
 }

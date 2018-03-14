@@ -66,7 +66,19 @@ class MainIndexController
         return var_dump($res);*/
 
         $da = new \Models\User();
-        $results = $da->select_where('user_nick_name','=','Freedom');
+        $results = $da->select_where(jsonFieldsDB('jsonval','obj.obj1.gg'),'=',1);
+        //$user = $results[0];
+        /*$rr = new stdClass();
+        $rr->name = "gogo";
+        $rrr = new stdClass();
+        $rrr->obj1 = new stdClass();
+        $rrr->obj1->thename = "go";
+        $rr->obj = $rrr;
+        $result = json_encode($rr);
+        //return var_dump($result);
+        $user->jsonval = json_encode($rr);
+        $user->save();*/
+
         return var_dump($results);
 
         $postReq = new Request();
