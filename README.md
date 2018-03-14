@@ -140,7 +140,27 @@ Will return an array of User Model Records or will return false;
 
 <br>
 <br>
+ 
+ 
+ MODELS, DB AND SQL JSON COLUMNS
+ ----------------------------------------------------
+ example: at jsonVal column there is this json record-> {"obj": {"obj1": {"gg": 1, "thename": "go"}}, "name": "gogo"}
+          
+          $userModel = new \Models\User();
+          $results = $userModel->select_where(jsonFieldsDB('jsonval','obj.obj1.gg'),'=',1);
+                                                               |            |       Logic               
+                                                          column name      json       
+                                                                       obj->obj1->gg
+                                                                            
+ 
+ --------------------------------------------------------
+ 
+Will return an array of User Model Records or will return false; 
+
+<br>
+<br>
  TODO: extending model's functionalities
+ 
  
  
  

@@ -151,9 +151,12 @@ class DB
 
 
 }
+<<<<<<< HEAD
 
 function jsonFieldsDB($column, $obj)
 {
     $result = $column.'->"$.'.$obj.'"';
     return $result;
 }
+=======
+>>>>>>> 8b481de505237e285d4b14d56745a06d6f0fed61
